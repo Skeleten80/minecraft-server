@@ -44,6 +44,29 @@ alpha builds for it, and Geyser targets 26.2 — so everyone plays on **26.2**.
 > By running the server you accept Mojang's [EULA](https://www.minecraft.net/en-us/eula)
 > (`eula.txt` in this folder records that).
 
+## Running on Windows (x86-64)
+
+Yes — everything here works on a Windows PC too. Java is cross-platform; only
+the scripts differ.
+
+1. **Install Java 25.** Grab the **Windows x64** `.msi` of
+   [Temurin 25](https://adoptium.net/temurin/releases/?version=25) and run it
+   (the installer sets up `java` on your PATH).
+2. **Copy this folder** to the PC, e.g. `C:\minecraft-server`.
+3. **Double-click `install.bat`** (one time) — downloads the same pinned jars.
+4. **Double-click `start.bat`** to launch the server. First boot takes 1–3
+   minutes while it generates the world; `Done (...)!` means it's live.
+   Type `stop` in the console window (or Ctrl+C) to shut down cleanly.
+
+Notes for Windows:
+- Windows Firewall will ask to allow Java on first launch — allow it on
+  private (and public, if friends connect over the internet).
+- Prevent sleep while hosting: Settings → System → Power → set sleep to
+  "Never" while the server is up, or run `powercfg /change standby-timeout-ac 0`.
+- Backups: run `powershell -ExecutionPolicy Bypass -File backup.ps1`
+  (saves timestamped `.zip` files into `backups\`, keeps the 10 newest).
+- RAM override: `set MC_RAM=8G && start.bat` (default 4G).
+
 ## Letting friends in (port forwarding)
 
 Your router needs two forwards pointing at the iMac's LAN IP:
@@ -114,9 +137,9 @@ Run it while the server is stopped — or type `save-all` in the console first.
 ## Files
 
 ```
-install.sh                 download pinned jars (one time)
-start.sh                   launch the server (foreground)
-backup.sh                  timestamped backup of worlds + configs
+install.sh / install.ps1 (+ install.bat)   download pinned jars (one time, pick your OS)
+start.sh   / start.ps1   (+ start.bat)      launch the server (foreground)
+backup.sh  / backup.ps1                     timestamped backup of worlds + configs
 server.properties          server settings
 eula.txt                   Mojang EULA acceptance
 paper.jar                  (downloaded) Paper server
