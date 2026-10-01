@@ -24,10 +24,11 @@ alpha builds for it, and Geyser targets 26.2 — so everyone plays on **26.2**.
 
 ## Setup on the iMac
 
-1. **Install Java 25.** The iMac is Intel, so grab the **macOS x64** build of
-   [Temurin 25](https://adoptium.net/temurin/releases/?version=25) (the `.pkg`
-   installer is easiest).
-2. **Copy this folder** to the iMac, e.g. `~/minecraft-server`.
+1. **Install Java 25.** Grab the `.pkg` installer of
+   [Temurin 25](https://adoptium.net/temurin/releases/?version=25) — pick the
+   **macOS x64** build for an Intel Mac (like your dad's 2020 iMac) or the
+   **macOS aarch64** build for Apple Silicon (M1/M2/M3/M4/M6).
+2. **Copy this folder** to the Mac, e.g. `~/minecraft-server`.
 3. **Download the server files** (one time):
    ```bash
    cd ~/minecraft-server
@@ -43,6 +44,15 @@ alpha builds for it, and Geyser targets 26.2 — so everyone plays on **26.2**.
 
 > By running the server you accept Mojang's [EULA](https://www.minecraft.net/en-us/eula)
 > (`eula.txt` in this folder records that).
+
+## Apple Silicon Macs
+
+No script changes needed — Paper, Geyser, and Floodgate are pure Java, so they
+run natively on Apple Silicon with an ARM64 JDK (no Rosetta involved). Use the
+exact same `install.sh` / `start.sh` / `backup.sh`; just install the
+**macOS aarch64** Temurin 25 build from step 1 above. The M-series chips are
+actually great hosts for this — plenty of single-thread performance, which is
+what Minecraft cares about most.
 
 ## Running on Windows (x86-64)
 

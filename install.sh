@@ -9,8 +9,15 @@ cd "$(dirname "$0")"
 #   Geyser 2.11.3 build 1247      = Bedrock bridge, emulates Java 26.2
 #   Floodgate 2.2.5 build 141     = lets Bedrock players join without a Java account
 paper_download_url() {
-  curl -fsSL "https://fill.papermc.io/v3/projects/paper/versions/26.2/builds/129" \
-    | python3 -c "import json,sys; print(json.load(sys.stdin)['downloads']['server:default']['url'])"
+  local api="https://fill.papermc.io/v3/projects/paper/versions/26.2/builds/129"
+  local json url
+  json="$(curl -fsSL "$api" 2>/dev/null || true)"
+  if command -v python3 >/dev/null && [[ -n "$json" ]]; then
+    url="$(printf '%s' "$json" | python3 -c "import json,sys; print(json.load(sys.stdin)['downloads']['server:default']['url'])")"
+  fi
+  # Fallback: pinned direct URL (content-addressed, stable). Used when python3
+  # is unavailable, e.g. stock macOS without Xcode command line tools.
+  printf '%s\n' "${url:-https://fill-data.papermc.io/v1/objects/b1d8f6bfa1b6101fa8e947b53041cb3bdf5540e7b83b6547ca19ba7edefeb083/paper-26.2-129.jar}"
 }
 
 GEYSER_URL="https://download.geysermc.org/v2/projects/geyser/versions/2.11.3/builds/1247/downloads/spigot"
