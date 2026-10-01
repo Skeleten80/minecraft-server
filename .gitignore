@@ -1,0 +1,15 @@
+# Downloaded artifacts (install.sh fetches these pinned builds)
+paper.jar
+plugins/*.jar
+
+# Runtime data
+world/
+world_nether/
+world_the_end/
+logs/
+cache/
+backups/*
+!backups/.gitkeep
+
+# Floodgate's identity key (generated per-install, never commit)
+plugins/floodgate/key.pem

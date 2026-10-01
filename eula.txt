@@ -1,0 +1,4 @@
+# By running this server you agree to Mojang's Minecraft EULA:
+# https://www.minecraft.net/en-us/eula
+# (eula=true below records that agreement.)
+eula=true
