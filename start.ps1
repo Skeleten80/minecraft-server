@@ -7,7 +7,7 @@ Set-Location $PSScriptRoot
 if (-not (Test-Path "paper.jar")) { Write-Error "paper.jar missing - run install.bat first"; exit 1 }
 if (-not (Get-Command java -ErrorAction SilentlyContinue)) { Write-Error "Java not found - install Java 25+ first (see README)"; exit 1 }
 
-$Ram = if ($env:MC_RAM) { $env:MC_RAM } else { "4G" }
+$Ram = if ($env:MC_RAM) { $env:MC_RAM } else { "8G" }
 Write-Host "Starting Paper 26.2 with $Ram RAM (override: `$env:MC_RAM='8G')"
 
 & java "-Xms$Ram" "-Xmx$Ram" `
