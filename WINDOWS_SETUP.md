@@ -25,7 +25,7 @@ cd minecraft-server
 
 Then right-click `install.bat` → **Run as administrator** (or double-click; admin avoids
 permission quirks). This downloads the pinned jars: `paper.jar` + Geyser + Floodgate
-into `plugins/`. Idempotent — safe to re-run.
++ BlueMap into `plugins/`. Idempotent — safe to re-run.
 
 ## 3. First boot (generates configs)
 
@@ -67,22 +67,35 @@ Tip: in the router, give the server PC a **DHCP reservation** so its LAN IP neve
 3. Find the public IP: visit https://whatismyip.com on the home network.
 4. Brother connects (Java) to `<public-ip>:25565`.
 
-## 7. Whitelist (after everyone's joined once)
+## 7. Whitelist (on from the start)
+
+`server.properties` ships with `white-list=true` — the server is family-only from
+the first boot, which matters because §6 opens it to the internet.
 
 In the server console:
 
 ```
-whitelist on
 whitelist add <exact player name>
 ```
 
-Add names exactly as they appear in the console when each person joins
-(Bedrock names come through Floodgate — copy them verbatim).
+- **Java players:** add the names up front, before anyone connects.
+- **Bedrock players (Floodgate):** their names aren't known until the first join
+  attempt. Have them try once — the console logs the rejected name verbatim
+  (usually with a `.` prefix, e.g. `.PlayerName`) — then `whitelist add` that
+  exact name and have them rejoin.
 
-## 8. Backups
+## 8. Backups (automatic)
 
-`backup.ps1` zips the world folders into `backups/`. Run it before any big change,
-or schedule it with Task Scheduler (weekly is plenty for a family server).
+`backup.ps1` zips the world folders + configs into `backups/` (keeps the 10 newest).
+Register it to run daily at 4:00 AM — **run once as Administrator**:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File setup-backup-task.ps1
+```
+
+Verify in Task Scheduler (`taskschd.msc`) → "NeptuneCraft Daily Backup".
+Tip for a years-long world: copy the newest `backups\backup-*.zip` to another
+machine or external drive now and then — same-drive backups don't survive a dead drive.
 
 ## 9. Day-to-day
 
@@ -90,6 +103,22 @@ or schedule it with Task Scheduler (weekly is plenty for a family server).
 - Mathias plays from the gaming PC via Multiplayer → server's LAN IP. Same world,
   same OBS recording setup — just connect instead of opening Singleplayer.
 - Console shows joins/leaves; `op <name>` gives admin to trusted players.
+
+## 10. BlueMap — live 3D world map
+
+BlueMap renders the world to an interactive 3D map you can open in a browser.
+Useful for planning the mega-base and for episode thumbnails.
+
+- After the first boot, open **`http://<server-LAN-IP>:8100`** on any home device.
+  The map renders live as chunks generate — explored areas appear automatically.
+- In-game: `/bluemap` shows player markers; the map follows builds in near-real-time.
+- Windows Firewall: allow inbound TCP 8100 on the server PC:
+  ```powershell
+  New-NetFirewallRule -DisplayName "BlueMap" -Direction Inbound -Protocol TCP -LocalPort 8100 -Action Allow
+  ```
+- Optional — let your brother see it remotely: forward **TCP 8100** → server PC
+  in the router (same place as §6), then it's `http://<public-ip>:8100`.
+  (Read-only map — no login, no griefing risk.)
 
 ## Troubleshooting
 

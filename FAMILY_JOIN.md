@@ -38,14 +38,17 @@ text him and he'll confirm when it's open.
 
 ---
 
-## Once everyone's in — whitelist (Mathias, on the server PC console)
+## Whitelist is ON — first join needs Mathias (server PC console)
 
-```
-whitelist on
-whitelist add <player-name>     (repeat for each person)
-```
+The server only allows whitelisted names. If you've never joined before:
 
-After this, only whitelisted names can join — the server stays family-only.
+1. Try joining anyway — the server will reject you, but the console logs your
+   exact player name (Bedrock names usually show with a `.` prefix).
+2. Mathias runs in the server console:
+   ```
+   whitelist add <player-name>     (copy it verbatim from the console log)
+   ```
+3. Join again — you're in from then on.
 
 ## Quick fixes
 

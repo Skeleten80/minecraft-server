@@ -4,14 +4,16 @@
 $ErrorActionPreference = "Stop"
 Set-Location $PSScriptRoot
 
-# Pinned versions (verified working together on 2026-09-30):
+# Pinned versions (verified working together on 2026-09-30, BlueMap added 2026-10-11):
 #   Paper 26.2 build 129 (STABLE) = Minecraft Java 26.2, requires Java 25+
 #   Geyser 2.11.3 build 1247      = Bedrock bridge, emulates Java 26.2
 #   Floodgate 2.2.5 build 141     = lets Bedrock players join without a Java account
+#   BlueMap 5.29 (paper)          = live 3D web map of the world (http://<server>:8100)
 $FillApi = "https://fill.papermc.io/v3/projects/paper/versions/26.2/builds/129"
 $PaperUrl = (Invoke-RestMethod -Uri $FillApi).downloads.'server:default'.url
 $GeyserUrl = "https://download.geysermc.org/v2/projects/geyser/versions/2.11.3/builds/1247/downloads/spigot"
 $FloodgateUrl = "https://download.geysermc.org/v2/projects/floodgate/versions/2.2.5/builds/141/downloads/spigot"
+$BlueMapUrl = "https://cdn.modrinth.com/data/swbUV1cr/versions/uHQIrUdf/bluemap-5.29-paper.jar"
 
 function Fetch($Url, $Dest) {
     if ((Test-Path $Dest) -and ((Get-Item $Dest).Length -gt 0)) {
@@ -29,6 +31,7 @@ function Fetch($Url, $Dest) {
 Fetch $PaperUrl    "paper.jar"
 Fetch $GeyserUrl   "plugins\Geyser-Spigot.jar"
 Fetch $FloodgateUrl "plugins\Floodgate-Spigot.jar"
+Fetch $BlueMapUrl  "plugins\bluemap-5.29-paper.jar"
 
 Write-Host ""
 Write-Host "All jars ready. Next: start.bat"

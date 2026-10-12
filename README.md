@@ -11,8 +11,10 @@ A self-hosted, near-vanilla Minecraft server that Java **and** Bedrock players
 | Minecraft Java | 26.2 | The game version the server runs |
 | Geyser | 2.11.3 build 1247 | Translates between Bedrock and Java protocols |
 | Floodgate | 2.2.5 build 141 | Lets Bedrock players join **without** owning Java Edition |
+| BlueMap | 5.29 (paper) | Live 3D web map of the world at `http://<server>:8100` |
 
-These four are pinned to builds that were verified working together on 2026-09-30.
+These five are pinned to builds that were verified working together on 2026-09-30
+(BlueMap added 2026-10-11, targets MC 26.2).
 Paper 26.2 is the latest *stable* line; Minecraft 26.3 exists but Paper only has
 alpha builds for it, and Geyser targets 26.2 — so everyone plays on **26.2**.
 
@@ -85,6 +87,7 @@ Your router needs two forwards pointing at the iMac's LAN IP:
 |---|---|---|
 | 25565 | TCP | Java Edition players |
 | 19132 | UDP | Bedrock players (Geyser) |
+| 8100 | TCP | BlueMap web map (optional, §10 of WINDOWS_SETUP.md) |
 
 Steps vary by router, but it's always: log into the router admin page →
 port forwarding/virtual server → add those two rules → save. Also allow them
@@ -150,12 +153,14 @@ Run it while the server is stopped — or type `save-all` in the console first.
 install.sh / install.ps1 (+ install.bat)   download pinned jars (one time, pick your OS)
 start.sh   / start.ps1   (+ start.bat)      launch the server (foreground)
 backup.sh  / backup.ps1                     timestamped backup of worlds + configs
+setup-backup-task.ps1      registers the daily 4 AM backup task (Windows, run once as admin)
 server.properties          server settings
 eula.txt                   Mojang EULA acceptance
 paper.jar                  (downloaded) Paper server
 plugins/
   Geyser-Spigot.jar        (downloaded) Bedrock bridge
   Floodgate-Spigot.jar     (downloaded) Bedrock auth
+  bluemap-5.29-paper.jar   (downloaded) Live 3D web map (port 8100)
   Geyser-Spigot/config.yml Bedrock listener config (port 19132, Floodgate auth)
 backups/                   your backups land here
 ```
