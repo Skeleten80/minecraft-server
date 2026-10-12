@@ -36,8 +36,9 @@ and the world folders.
 ## 4. Move the Perpetua world in
 
 **Version check first — the server runs Minecraft 26.2:**
-1. Your gaming-PC client needs a **26.2** installation (launcher → Installations →
-   New installation → version 26.2). A 26.3 client cannot join a 26.2 server.
+1. Your gaming-PC client is best on **26.2** (launcher → Installations → New
+   installation → version 26.2). Newer clients (e.g. 26.3) can also join via
+   ViaVersion, but 26.2 is native — use it for the world move.
 2. The Perpetua world itself must have been last saved in **26.2 or older** —
    Paper 26.2 cannot open a 26.3 world. (If you created it Oct 7 on a 26.2
    client, you're fine. If in doubt, check the installation you played it on.)

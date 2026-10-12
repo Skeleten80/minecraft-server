@@ -12,8 +12,9 @@ A self-hosted, near-vanilla Minecraft server that Java **and** Bedrock players
 | Geyser | 2.11.3 build 1247 | Translates between Bedrock and Java protocols |
 | Floodgate | 2.2.5 build 141 | Lets Bedrock players join **without** owning Java Edition |
 | BlueMap | 5.29 (paper) | Live 3D web map of the world at `http://<server>:8100` |
+| ViaVersion | 5.12.2-SNAPSHOT+1103 | Lets newer Java clients (e.g. 26.3) join this 26.2 server |
 
-These five are pinned to builds that were verified working together on 2026-09-30
+These six are pinned to builds that were verified working together on 2026-09-30
 (BlueMap added 2026-10-11, targets MC 26.2).
 Paper 26.2 is the latest *stable* line; Minecraft 26.3 exists but Paper only has
 alpha builds for it, and Geyser targets 26.2 — so everyone plays on **26.2**.
@@ -109,8 +110,8 @@ auto-start) is in WINDOWS_SETUP.md §10.
 ## How players connect
 
 **Java Edition (PC/Mac):** Multiplayer → Add Server → address `<your-ip>:25565`.
-⚠️ The client must be set to **release 26.2** (Installations tab → New → version
-26.2). A 26.3 client cannot join a 26.2 server.
+Best on **release 26.2** (Installations tab → New → version 26.2); newer clients
+(e.g. 26.3) can also join thanks to ViaVersion, but 26.2 is the native version.
 
 **Bedrock (Xbox, PlayStation, Switch, iOS, Android, Windows):**
 Play → Servers → scroll down → Add Server → address `<your-ip>`, port `19132`.
@@ -159,6 +160,7 @@ plugins/
   Geyser-Spigot.jar        (downloaded) Bedrock bridge
   Floodgate-Spigot.jar     (downloaded) Bedrock auth
   bluemap-5.29-paper.jar   (downloaded) Live 3D web map (port 8100)
+  ViaVersion-5.12.2-SNAPSHOT.jar (downloaded) Newer Java clients can join
   Geyser-Spigot/config.yml Bedrock listener config (port 19132, Floodgate auth)
 backups/                   your backups land here
 ```
@@ -173,7 +175,5 @@ Drop plugin jars into `plugins/` and restart. Good first additions:
 - **LuckPerms** — permissions/ranks
 - **CoreProtect** — block logging + rollback griefing
 - **Chunky** — pre-generate the world so exploring doesn't lag (`chunky start`)
-- **BlueMap** — live web map of your world
-- **ViaVersion** — let newer Java clients (e.g. 26.3) join the 26.2 server
 
 Say the word and I'll wire any of these up.
