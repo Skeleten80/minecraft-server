@@ -6,7 +6,7 @@ cd "$(dirname "$0")"
 [[ -f paper.jar ]] || { echo "paper.jar missing - run ./install.sh first"; exit 1; }
 command -v java >/dev/null || { echo "Java not found - install Java 25+ first (see README)"; exit 1; }
 
-RAM="${MC_RAM:-4G}"
+RAM="${MC_RAM:-8G}"
 echo "Starting Paper 26.2 with ${RAM} RAM (override: MC_RAM=8G ./start.sh)"
 
 exec java -Xms"${RAM}" -Xmx"${RAM}" \

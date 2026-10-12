@@ -4,10 +4,12 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 
-# Pinned versions (verified working together on 2026-09-30):
+# Pinned versions (verified working together on 2026-09-30, BlueMap/ViaVersion added 2026-10-11):
 #   Paper 26.2 build 129 (STABLE) = Minecraft Java 26.2, requires Java 25+
 #   Geyser 2.11.3 build 1247      = Bedrock bridge, emulates Java 26.2
 #   Floodgate 2.2.5 build 141     = lets Bedrock players join without a Java account
+#   BlueMap 5.29 (paper)          = live 3D web map of the world (http://<server>:8100)
+#   ViaVersion 5.12.2-SNAPSHOT+1103 = lets NEWER Java clients join this 26.2 server
 paper_download_url() {
   local api="https://fill.papermc.io/v3/projects/paper/versions/26.2/builds/129"
   local json url
@@ -22,6 +24,8 @@ paper_download_url() {
 
 GEYSER_URL="https://download.geysermc.org/v2/projects/geyser/versions/2.11.3/builds/1247/downloads/spigot"
 FLOODGATE_URL="https://download.geysermc.org/v2/projects/floodgate/versions/2.2.5/builds/141/downloads/spigot"
+BLUEMAP_URL="https://cdn.modrinth.com/data/swbUV1cr/versions/uHQIrUdf/bluemap-5.29-paper.jar"
+VIAVERSION_URL="https://cdn.modrinth.com/data/P1OZGk5p/versions/tAzfkY09/ViaVersion-5.12.2-SNAPSHOT.jar"
 
 fetch() {
   local url="$1" dest="$2"
@@ -38,6 +42,8 @@ mkdir -p plugins
 fetch "$(paper_download_url)" "paper.jar"
 fetch "$GEYSER_URL"            "plugins/Geyser-Spigot.jar"
 fetch "$FLOODGATE_URL"         "plugins/Floodgate-Spigot.jar"
+fetch "$BLUEMAP_URL"           "plugins/bluemap-5.29-paper.jar"
+fetch "$VIAVERSION_URL"        "plugins/ViaVersion-5.12.2-SNAPSHOT.jar"
 
 echo
 echo "All jars ready. Next: ./start.sh"
