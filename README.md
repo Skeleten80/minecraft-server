@@ -22,7 +22,7 @@ alpha builds for it, and Geyser targets 26.2 — so everyone plays on **26.2**.
 
 - **Java 25 or newer** (Paper 26.x will not run on older Java)
 - ~4 GB of free RAM (adjustable — see below)
-- A machine that stays on while people play (your dad's iMac works)
+- A machine that stays on while people play (the old Windows 11 PC — see WINDOWS_SETUP.md)
 
 ## Setup on the iMac
 
@@ -77,36 +77,34 @@ Notes for Windows:
   "Never" while the server is up, or run `powercfg /change standby-timeout-ac 0`.
 - Backups: run `powershell -ExecutionPolicy Bypass -File backup.ps1`
   (saves timestamped `.zip` files into `backups\`, keeps the 10 newest).
-- RAM override: `set MC_RAM=8G && start.bat` (default 4G).
+- RAM override: `set MC_RAM=8G && start.bat` (default 8G).
 
 ## Letting friends in (port forwarding)
 
-Your router needs two forwards pointing at the iMac's LAN IP:
+Your router needs two forwards pointing at the server PC's LAN IP:
 
 | Port | Protocol | For |
 |---|---|---|
 | 25565 | TCP | Java Edition players |
 | 19132 | UDP | Bedrock players (Geyser) |
-| 8100 | TCP | BlueMap web map (optional, §10 of WINDOWS_SETUP.md) |
+| 8100 | TCP | BlueMap web map (optional, §11 of WINDOWS_SETUP.md) |
 
 Steps vary by router, but it's always: log into the router admin page →
 port forwarding/virtual server → add those two rules → save. Also allow them
-through the macOS firewall (System Settings → Network → Firewall) if it's on.
+through Windows Firewall (see WINDOWS_SETUP.md §6 for the exact commands).
 
-Find the iMac's LAN IP in System Settings → Wi-Fi → Details (e.g. `192.168.1.42`).
+Find the server PC's LAN IP with `ipconfig` in PowerShell
+(IPv4 Address, e.g. `192.168.1.50`).
 Friends on your home network connect to that. Friends over the internet connect
 to your **public** IP (search "what's my ip") — note it can change unless your
 ISP gives you a static one.
 
-## Keep the iMac awake
+## Keep the server PC awake
 
-If the iMac sleeps, the server goes down. Either set
-System Settings → Energy → "Prevent automatic sleeping when the display is off",
-or run this in a terminal while hosting:
-
-```bash
-caffeinate -i
-```
+If the PC sleeps, the server goes down. Set
+Settings → System → Power & battery → "Put my device to sleep after" to **Never**
+while plugged in. Full checklist (sleep, Windows Update active hours, optional
+auto-start) is in WINDOWS_SETUP.md §10.
 
 ## How players connect
 

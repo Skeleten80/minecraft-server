@@ -35,6 +35,15 @@ and the world folders.
 
 ## 4. Move the Perpetua world in
 
+**Version check first — the server runs Minecraft 26.2:**
+1. Your gaming-PC client needs a **26.2** installation (launcher → Installations →
+   New installation → version 26.2). A 26.3 client cannot join a 26.2 server.
+2. The Perpetua world itself must have been last saved in **26.2 or older** —
+   Paper 26.2 cannot open a 26.3 world. (If you created it Oct 7 on a 26.2
+   client, you're fine. If in doubt, check the installation you played it on.)
+
+Then:
+
 1. On the gaming PC: **back up** the Perpetua world folder first (copy it somewhere safe).
 2. Copy the world folder to the server PC, into the `minecraft-server` folder.
 3. In `server.properties`, set `level-name` to the world's folder name, e.g.:
@@ -43,6 +52,9 @@ and the world folders.
 4. Double-click `start.bat` again. The world loads; difficulty is Easy per config.
 
 Mathias's inventory/position carry over automatically (same Microsoft account = same UUID).
+
+**After the move, retire the single-player copy** — don't keep opening it or the
+two worlds diverge. The backup from step 1 is your rollback if anything goes wrong.
 
 ## 5. LAN players (wife, kids)
 
@@ -104,7 +116,21 @@ machine or external drive now and then — same-drive backups don't survive a de
   same OBS recording setup — just connect instead of opening Singleplayer.
 - Console shows joins/leaves; `op <name>` gives admin to trusted players.
 
-## 10. BlueMap — live 3D world map
+## 10. Keep the server PC awake
+
+If the PC sleeps or reboots for updates, the server goes down with it.
+
+- **Sleep:** Settings → System → Power & battery → Screen and sleep → set
+  "Put my device to sleep after" to **Never** while plugged in.
+  (The display can still turn off — that's separate.)
+- **Windows Update:** Settings → Windows Update → Advanced options → set generous
+  **Active hours**, so it doesn't reboot mid-game. For a big family weekend,
+  "Pause updates" for 7 days is the simple option.
+- **Optional auto-start:** drop a shortcut to `start.bat` into the Startup folder
+  (Win+R → type `shell:startup` → paste shortcut) and the server launches
+  whenever the PC boots.
+
+## 11. BlueMap — live 3D world map
 
 BlueMap renders the world to an interactive 3D map you can open in a browser.
 Useful for planning the mega-base and for episode thumbnails.
